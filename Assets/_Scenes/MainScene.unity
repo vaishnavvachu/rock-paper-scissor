@@ -287,8 +287,8 @@ RectTransform:
   - {fileID: 469532859}
   - {fileID: 1434926399}
   - {fileID: 1846919628}
-  - {fileID: 796820940}
   - {fileID: 1509449433}
+  - {fileID: 796820940}
   m_Father: {fileID: 2107177859}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -566,6 +566,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuPanel: {fileID: 1752784535}
   gamePanel: {fileID: 708199061}
+  playerHandImage: {fileID: 1809789490}
+  aiHandImage: {fileID: 883118857}
+  rockSprite: {fileID: 21300000, guid: a7ccb3e83dfbaa747b61d6299e3c3f85, type: 3}
+  paperSprite: {fileID: 21300000, guid: 6d512ffd7db218841a05acc3f07c3fc9, type: 3}
+  scissorsSprite: {fileID: 21300000, guid: 0b50f880fce02e54392a3452a6b66ac4, type: 3}
+  lizardSprite: {fileID: 21300000, guid: d3f3e8687011fb64fbeb9f97d11afec7, type: 3}
+  spockSprite: {fileID: 21300000, guid: 98a55f484264f65439129e5f3aed5b69, type: 3}
 --- !u!1 &397905471
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +585,7 @@ GameObject:
   - component: {fileID: 397905474}
   - component: {fileID: 397905473}
   m_Layer: 5
-  m_Name: Computer Section
+  m_Name: AI Player Section
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1193,7 +1200,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2474,7 +2481,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

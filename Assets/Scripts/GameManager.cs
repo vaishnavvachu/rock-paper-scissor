@@ -1,5 +1,6 @@
 using HandStrategy;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +39,9 @@ public class GameManager : MonoBehaviour
         else if (aiHand.Beats(playerHand))
         {
             resultText.text = $"You Lose!";
-            _score = 0;
+            _score = 0; 
+            
+            Invoke(nameof(ReturnToMainMenu), 1.5f);
         }
         else
         {
@@ -46,5 +49,10 @@ public class GameManager : MonoBehaviour
         }
 
         scoreText.text = "Score: " + _score;
+    }
+
+    private void ReturnToMainMenu()
+    {
+        UIManager.Instance.ShowMainMenu();
     }
 }

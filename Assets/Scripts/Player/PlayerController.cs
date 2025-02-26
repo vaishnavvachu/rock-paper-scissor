@@ -1,4 +1,5 @@
 using HandStrategy;
+using UI;
 using UnityEngine;
 
 namespace Player
@@ -7,7 +8,6 @@ namespace Player
     {
         private IHandStrategy _playerHand;
         private AIPlayer _aiPlayer;
-
         void Start()
         {
             _aiPlayer = FindFirstObjectByType<AIPlayer>();
@@ -38,6 +38,8 @@ namespace Player
             IHandStrategy aiHand = _aiPlayer.GetRandomHand();
         
             GameManager.Instance.EvaluateRound(_playerHand, aiHand);
+            UIManager.Instance.UpdateHandImages(_playerHand.GetHandType(), aiHand.GetHandType());
+
         }
     }
 }
