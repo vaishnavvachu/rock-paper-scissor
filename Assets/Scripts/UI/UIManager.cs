@@ -108,5 +108,11 @@ namespace UI
             else
                 Debug.LogError($"No sprite found: {aiHand}");
         }
+        
+        public void ResetHandImages()
+        {
+            playerHandImage.sprite = null;
+            aiHandImage.sprite = null;
+        }
     }
 }

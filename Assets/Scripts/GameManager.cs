@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         CancelRoundTimer();
         UIManager.Instance.StartTimerAnimation();
+        UIManager.Instance.ResetHandImages();
         _selectionTimerCoroutine = StartCoroutine(PlayerSelectionTimer());
         
     }
@@ -78,8 +79,8 @@ public class GameManager : MonoBehaviour
         else if (aiHand.Beats(playerHand))
         {
             resultText.text = $"You Lose! {aiChoice} beats {playerChoice}";
-            _score = 0; 
-            scoreText.text = "Score: " + _score;
+            //_score = 0; 
+            //scoreText.text = "Score: " + _score;
             Invoke(nameof(ReturnToMainMenu), 1.5f);
         }
         else
