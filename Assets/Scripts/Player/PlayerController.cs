@@ -14,6 +14,8 @@ namespace Player
         }
         public void SelectHand(int handIndex)
         {
+            GameManager.Instance.CancelRoundTimer();
+            
             HandType handType = (HandType)handIndex;
         
             switch (handType)

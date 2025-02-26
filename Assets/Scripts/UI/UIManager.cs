@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using HandStrategy;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,9 @@ namespace UI
         [Header("Hand UI References")]
         [SerializeField] private Image playerHandImage;
         [SerializeField] private Image aiHandImage;
+        
+        [Header("Timer UI References")]
+        [SerializeField] private Image timerProgressBar; 
         
         [Header("Sprite References")]
         [SerializeField] private Sprite rockSprite;
@@ -58,7 +62,22 @@ namespace UI
         {
             SetState(new MainMenuState()); 
         }
-
+        public void StartTimerAnimation()
+        {
+            if (timerProgressBar != null)
+            {
+                timerProgressBar.fillAmount = 1; 
+                timerProgressBar.DOFillAmount(0, 2f).SetEase(Ease.Linear);
+            }
+        }
+        public void ResetTimerAnimation()
+        {
+            if (timerProgressBar != null)
+            {
+                timerProgressBar.DOKill();
+                timerProgressBar.fillAmount = 1;
+            }
+        }
         public void SetState(UIState newState)
         {
             _currentState?.Exit(this);
@@ -69,6 +88,7 @@ namespace UI
         public void StartGame()
         {
             SetState(new GameState()); 
+            GameManager.Instance.StartRoundTimer();
         }
 
         public void ShowMainMenu()
