@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             resultText.text = "Time's up! You lose!";
             _score = 0; 
-            scoreText.text = "Score: " + _score;
+            scoreText.text = _score.ToString();
             Invoke(nameof(ReturnToMainMenu), 1.5f);
             return;
         }
@@ -79,8 +79,7 @@ public class GameManager : MonoBehaviour
         else if (aiHand.Beats(playerHand))
         {
             resultText.text = $"You Lose! {aiChoice} beats {playerChoice}";
-            //_score = 0; 
-            //scoreText.text = "Score: " + _score;
+            
             Invoke(nameof(ReturnToMainMenu), 1.5f);
         }
         else
@@ -88,14 +87,21 @@ public class GameManager : MonoBehaviour
             resultText.text = "It's a Draw!";
             Invoke(nameof(RestartRound), 0.5f);
         }
+        HighScoreManager.Instance.UpdateScore(_score);
     }
     private void RestartRound()
     {
-       
         StartRoundTimer();
     }
     private void ReturnToMainMenu()
     {
         UIManager.Instance.ShowMainMenu();
+        ResetScore();
+    }
+
+    void ResetScore()
+    {
+        _score = 0;
+        scoreText.text = "Score: " + _score;
     }
 }
