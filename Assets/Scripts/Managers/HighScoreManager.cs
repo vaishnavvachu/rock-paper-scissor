@@ -1,3 +1,4 @@
+using Managers;
 using TMPro;
 using UnityEngine;
 
@@ -30,12 +31,14 @@ public class HighScoreManager : MonoBehaviour
         if (newScore > _highScore)
         {
             _highScore = newScore;
+            AudioManager.Instance.PlayLoseSFX();
             SaveHighScore();
         }
     }
-    private void LoadHighScore()
+    public void LoadHighScore()
     {
         _highScore = PlayerPrefs.GetInt("HighScore", 0);
+        highScoreText.text = $"HIGHSCORE: {HighScore}";
     }
     private void SaveHighScore()
     {

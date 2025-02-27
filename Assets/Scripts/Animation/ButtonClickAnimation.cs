@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace Animation
             _button.onClick.AddListener(() => 
             {
                 AnimationEvents.ButtonClicked(gameObject);
+                AudioManager.Instance.PlayButtonClickSFX();
             });
         }
     }

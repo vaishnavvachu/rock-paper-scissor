@@ -1,6 +1,7 @@
 using System.Collections;
 using Animation;
 using HandStrategy;
+using Managers;
 using Player;
 using TMPro;
 using UI;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             _message = "Time's up! You lose!";
             _score = 0; 
             scoreText.text = _score.ToString();
+            
             AnimationEvents.RoundResultPopup(_message);
             Invoke(nameof(ReturnToMainMenu), 2f);
             return;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             _score++;
             AnimationEvents.ScoreIncreased(Vector3.zero, "+1");
+            AudioManager.Instance.PlayWinSFX();
             _message = $"You Win! {playerChoice} beats {aiChoice}";
             scoreText.text = "Score: " + _score;
             Invoke(nameof(RestartRound), 2f);
@@ -84,11 +87,14 @@ public class GameManager : MonoBehaviour
         else if (aiHand.Beats(playerHand))
         {
             _message = $"You Lose! {aiChoice} beats {playerChoice}";
+            AudioManager.Instance.PlayLoseSFX();
+            
             Invoke(nameof(ReturnToMainMenu), 2f);
         }
         else
         {
             _message = "It's a Draw!";
+            AudioManager.Instance.PlayDrawSFX();
             Invoke(nameof(RestartRound), 2f);
         }
         AnimationEvents.RoundResultPopup(_message);
@@ -101,6 +107,7 @@ public class GameManager : MonoBehaviour
     }
     private void ReturnToMainMenu()
     {
+        HighScoreManager.Instance.LoadHighScore();
         UIManager.Instance.ShowMainMenu();
         ResetScore();
     }
