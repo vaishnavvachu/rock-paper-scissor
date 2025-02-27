@@ -1,120 +1,136 @@
 using System.Collections;
 using Animation;
 using HandStrategy;
-using Managers;
 using Player;
 using TMPro;
 using UI;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+namespace Managers
 {
-    public static GameManager Instance { get; private set; }
-   [SerializeField] private TextMeshProUGUI scoreText;
+    public class GameManager : MonoBehaviour
+    {
+        public static GameManager Instance { get; private set; }
+        [SerializeField] private TextMeshProUGUI scoreText;
 
-    private int _score = 0;
-    private Coroutine _selectionTimerCoroutine;
-    private AIPlayer _aiPlayer;
-    private void Awake()
-    {
-        if (Instance == null)
+        private int _score;
+        private Coroutine _selectionTimerCoroutine;
+        private AIPlayer _aiPlayer;
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+        void Start()
         {
-            Destroy(gameObject);
+            _aiPlayer = FindFirstObjectByType<AIPlayer>();
         }
-    }
-    void Start()
-    {
-        _aiPlayer = FindFirstObjectByType<AIPlayer>();
-    }
-    public void StartRoundTimer()
-    {
-        CancelRoundTimer();
-        UIManager.Instance.StartTimerAnimation();
-        _selectionTimerCoroutine = StartCoroutine(PlayerSelectionTimer());
-        UIManager.Instance.ResetHandImages();
-    }
-    public void CancelRoundTimer()
-    {
-        if (_selectionTimerCoroutine != null)
+        public void StartRoundTimer()
         {
-            StopCoroutine(_selectionTimerCoroutine);
-            _selectionTimerCoroutine = null;
+            CancelRoundTimer();
+            UIManager.Instance.StartTimerAnimation();
+            _selectionTimerCoroutine = StartCoroutine(PlayerSelectionTimer());
+            UIManager.Instance.ResetHandImages();
         }
-        UIManager.Instance.ResetTimerAnimation();
-    }
-    private IEnumerator PlayerSelectionTimer()
-    {
-        yield return new WaitForSeconds(2f);
-        IHandStrategy aiHand = _aiPlayer.GetRandomHand();
-        EvaluateRound(null, aiHand);
-    }
+        public void CancelRoundTimer()
+        {
+            if (_selectionTimerCoroutine != null)
+            {
+                StopCoroutine(_selectionTimerCoroutine);
+                _selectionTimerCoroutine = null;
+            }
+            UIManager.Instance.ResetTimerAnimation();
+        }
+        private IEnumerator PlayerSelectionTimer()
+        {
+            yield return new WaitForSeconds(2f);
+            IHandStrategy aiHand = _aiPlayer.GetRandomHand();
+            EvaluateRound(null, aiHand);
+        }
 
 
-    private string _message = "";
-    public void EvaluateRound(IHandStrategy playerHand, IHandStrategy aiHand)
-    {
-        bool isDraw = false;
-        if (playerHand == null)
+        private string _message = "";
+        public void EvaluateRound(IHandStrategy playerHand, IHandStrategy aiHand)
         {
-            _message = "Time's up! You lose!";
+            if (playerHand == null)
+            {
+                _message = "Time's up! You lose!";
+                OnTimeUp();
+                return;
+            }
+        
+            HandType playerChoice = playerHand.GetHandType();
+            HandType aiChoice = aiHand.GetHandType();
+            _ = !playerHand.Beats(aiHand) && !aiHand.Beats(playerHand);
+        
+            if (playerHand.Beats(aiHand))
+            {
+                OnPlayerWin();
+                _message = $"You Win! {playerChoice} beats {aiChoice}";
+            }
+            else if (aiHand.Beats(playerHand))
+            {
+                _message = $"You Lose! {aiChoice} beats {playerChoice}";
+                OnPlayerLose();
+            }
+            else
+            {
+                _message = "It's a Draw!";
+                OnPlayerDraw();
+            }
+            AnimationEvents.RoundResultPopup(_message);
+            HighScoreManager.Instance.UpdateScore(_score);
+        }
+
+        void OnTimeUp()
+        {
             _score = 0; 
             scoreText.text = _score.ToString();
-            
             AnimationEvents.RoundResultPopup(_message);
-            Invoke(nameof(ReturnToMainMenu), 2f);
-            return;
+            Invoke(nameof(OnGameOver), 2f);
         }
-        
-        HandType playerChoice = playerHand.GetHandType();
-        HandType aiChoice = aiHand.GetHandType();
-        isDraw = !playerHand.Beats(aiHand) && !aiHand.Beats(playerHand);
-        
-        if (playerHand.Beats(aiHand))
+        void OnPlayerWin()
         {
             _score++;
+            scoreText.text = "Score: " + _score;
             AnimationEvents.ScoreIncreased(Vector3.zero, "+1");
             AudioManager.Instance.PlayWinSFX();
-            _message = $"You Win! {playerChoice} beats {aiChoice}";
-            scoreText.text = "Score: " + _score;
             Invoke(nameof(RestartRound), 2f);
         }
-        else if (aiHand.Beats(playerHand))
+
+        void OnPlayerLose()
         {
-            _message = $"You Lose! {aiChoice} beats {playerChoice}";
             AudioManager.Instance.PlayLoseSFX();
-            
-            Invoke(nameof(ReturnToMainMenu), 2f);
+            Invoke(nameof(OnGameOver), 2f);
         }
-        else
+
+        void OnPlayerDraw()
         {
-            _message = "It's a Draw!";
             AudioManager.Instance.PlayDrawSFX();
             Invoke(nameof(RestartRound), 2f);
         }
-        AnimationEvents.RoundResultPopup(_message);
-        
-        HighScoreManager.Instance.UpdateScore(_score);
-    }
-    private void RestartRound()
-    {
-        StartRoundTimer();
-    }
-    private void ReturnToMainMenu()
-    {
-        HighScoreManager.Instance.LoadHighScore();
-        UIManager.Instance.ShowMainMenu();
-        ResetScore();
-    }
+        private void RestartRound()
+        {
+            StartRoundTimer();
+        }
+        private void OnGameOver()
+        {
+            HighScoreManager.Instance.LoadHighScore();
+            UIManager.Instance.ShowGameOver(_score);
+            ResetScore();
+        }
 
-    void ResetScore()
-    {
-        _score = 0;
-        scoreText.text = _score.ToString();
+        void ResetScore()
+        {
+            _score = 0;
+            scoreText.text = _score.ToString();
+        }
     }
 }

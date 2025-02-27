@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using HandStrategy;
+using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,10 @@ namespace UI
         [Header("Canvas References")]
         public GameObject mainMenuPanel;
         public GameObject gamePanel;
+        public GameObject gameOverPanel;
+        
+        [Header("GameOver UI Elements")]
+        public TextMeshProUGUI gameOverScoreText;
         
         [Header("Hand UI References")]
         [SerializeField] private Image playerHandImage;
@@ -96,7 +102,11 @@ namespace UI
         {
             SetState(new MainMenuState());
         }
-        
+         
+        public void ShowGameOver(int finalScore)
+        {
+            SetState(new GameOverState(finalScore));
+        }
         public void UpdateHandImages(HandType playerHand, HandType aiHand)
         {
             if (_handSprites.TryGetValue(playerHand, out Sprite playerSprite))
