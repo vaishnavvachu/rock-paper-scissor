@@ -569,6 +569,7 @@ MonoBehaviour:
   playerHandImage: {fileID: 1809789490}
   aiHandImage: {fileID: 883118857}
   timerProgressBar: {fileID: 1358982589}
+  defaultSprite: {fileID: 21300000, guid: 5f8f8cdb37675e94d992bbb94b345dea, type: 3}
   rockSprite: {fileID: 21300000, guid: a7ccb3e83dfbaa747b61d6299e3c3f85, type: 3}
   paperSprite: {fileID: 21300000, guid: 6d512ffd7db218841a05acc3f07c3fc9, type: 3}
   scissorsSprite: {fileID: 21300000, guid: 0b50f880fce02e54392a3452a6b66ac4, type: 3}

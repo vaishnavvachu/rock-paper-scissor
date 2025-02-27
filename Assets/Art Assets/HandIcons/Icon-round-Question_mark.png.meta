@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a7ccb3e83dfbaa747b61d6299e3c3f85
+guid: 5f8f8cdb37675e94d992bbb94b345dea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7689472236780604559
-    second: icon-rock_0
+      213: -1108236349674720239
+    second: Icon-round-Question_mark.svg_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: icon-rock_0
+      name: Icon-round-Question_mark.svg_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 48
+        width: 300
+        height: 300
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8c498f324e76ba60800000000000000
-      internalID: 7689472236780604559
+      spriteID: 114767269e0ce90f0800000000000000
+      internalID: -1108236349674720239
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      icon-rock_0: 7689472236780604559
+      Icon-round-Question_mark.svg_0: -1108236349674720239
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
