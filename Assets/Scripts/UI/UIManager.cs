@@ -135,7 +135,7 @@ namespace UI
             playerHandImage.DOFade(1f, 0.5f);
         }
         
-        private void AnimateAIHand(Sprite aiSprite, float delay = 0.5f)
+        private void AnimateAIHand(Sprite aiSprite, float delay = 0.1f)
         {
             aiHandImage.sprite = aiSprite;
             aiHandImage.transform.localScale = Vector3.zero;

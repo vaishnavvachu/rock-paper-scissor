@@ -1,12 +1,14 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Animation
 {
     public class AnimationManager : MonoBehaviour
     {
         public static AnimationManager Instance { get; private set; }
-        [SerializeField] private GameObject scorePopUpPrefab;
+        [SerializeField] private GameObject scorePopupPrefab;
+        [SerializeField] private GameObject resultPopupPrefab;
         
         private void Awake()
         {
@@ -25,12 +27,14 @@ namespace Animation
         {
             AnimationEvents.OnButtonClick += PlayButtonClickAnimation;
             AnimationEvents.OnScoreIncrease += PlayScoreIncreaseAnimation;
+            AnimationEvents.OnRoundResultPopup += HandleRoundResultPopup;
         }
 
         private void OnDisable()
         {
             AnimationEvents.OnButtonClick -= PlayButtonClickAnimation;
             AnimationEvents.OnScoreIncrease -= PlayScoreIncreaseAnimation;
+            AnimationEvents.OnRoundResultPopup -= HandleRoundResultPopup;
         }
         private void PlayButtonClickAnimation(GameObject buttonObj)
         {
@@ -41,8 +45,15 @@ namespace Animation
 
         private void PlayScoreIncreaseAnimation(Vector3 position, string popupText)
         {
-            GameObject popup = Instantiate(scorePopUpPrefab, position, Quaternion.identity, transform);
+            GameObject popup = Instantiate(scorePopupPrefab, position, Quaternion.identity, transform);
             popup.GetComponent<FloatingScorePopup>().SetText(popupText);
+        }
+        
+        private void HandleRoundResultPopup(string message)
+        {
+            GameObject popupObj = Instantiate(resultPopupPrefab);
+            ResultPopup popupAnim = popupObj.GetComponent<ResultPopup>();
+            popupAnim.Show(message);
         }
     }
 }

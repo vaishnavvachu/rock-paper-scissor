@@ -10,8 +10,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
-   [SerializeField] private TextMeshProUGUI resultText;
    [SerializeField] private TextMeshProUGUI scoreText;
 
     private int _score = 0;
@@ -55,39 +53,46 @@ public class GameManager : MonoBehaviour
         IHandStrategy aiHand = _aiPlayer.GetRandomHand();
         EvaluateRound(null, aiHand);
     }
-    
+
+
+    private string _message = "";
     public void EvaluateRound(IHandStrategy playerHand, IHandStrategy aiHand)
     {
+        bool isDraw = false;
         if (playerHand == null)
         {
-            resultText.text = "Time's up! You lose!";
+            _message = "Time's up! You lose!";
             _score = 0; 
             scoreText.text = _score.ToString();
-            Invoke(nameof(ReturnToMainMenu), 1.5f);
+            AnimationEvents.RoundResultPopup(_message);
+            Invoke(nameof(ReturnToMainMenu), 2f);
             return;
         }
+        
         HandType playerChoice = playerHand.GetHandType();
         HandType aiChoice = aiHand.GetHandType();
-
+        isDraw = !playerHand.Beats(aiHand) && !aiHand.Beats(playerHand);
+        
         if (playerHand.Beats(aiHand))
         {
             _score++;
             AnimationEvents.ScoreIncreased(Vector3.zero, "+1");
-            resultText.text = $"You Win! {playerChoice} beats {aiChoice}";
+            _message = $"You Win! {playerChoice} beats {aiChoice}";
             scoreText.text = "Score: " + _score;
-            Invoke(nameof(RestartRound), 1.5f);
+            Invoke(nameof(RestartRound), 2f);
         }
         else if (aiHand.Beats(playerHand))
         {
-            resultText.text = $"You Lose! {aiChoice} beats {playerChoice}";
-            
-            Invoke(nameof(ReturnToMainMenu), 1.5f);
+            _message = $"You Lose! {aiChoice} beats {playerChoice}";
+            Invoke(nameof(ReturnToMainMenu), 2f);
         }
         else
         {
-            resultText.text = "It's a Draw!";
-            Invoke(nameof(RestartRound), 1.5f);
+            _message = "It's a Draw!";
+            Invoke(nameof(RestartRound), 2f);
         }
+        AnimationEvents.RoundResultPopup(_message);
+        
         HighScoreManager.Instance.UpdateScore(_score);
     }
     private void RestartRound()

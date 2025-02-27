@@ -604,7 +604,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2917174955ec54da177d2922a95210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorePopUpPrefab: {fileID: 7347027457595262209, guid: ceef7213757a2f446a074e3e676deb5f, type: 3}
+  scorePopupPrefab: {fileID: 7347027457595262209, guid: ceef7213757a2f446a074e3e676deb5f, type: 3}
+  resultPopupPrefab: {fileID: 910115516465900431, guid: d101b7d08e40bfd47863f3a249628ccd, type: 3}
 --- !u!4 &393218337
 Transform:
   m_ObjectHideFlags: 0
@@ -1791,7 +1792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1034526889
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3591,7 +3592,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de91377f30a0e23469f970d394685430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultText: {fileID: 1034526890}
   scoreText: {fileID: 2089659404}
 --- !u!4 &1924895792
 Transform:

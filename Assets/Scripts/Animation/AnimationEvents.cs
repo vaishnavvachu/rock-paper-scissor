@@ -17,5 +17,11 @@ namespace Animation
         {
             OnScoreIncrease?.Invoke(position, popupText);
         }
+        
+        public static event Action<string> OnRoundResultPopup;
+        public static void RoundResultPopup(string message)
+        {
+            OnRoundResultPopup?.Invoke(message);
+        }
     }
 }
