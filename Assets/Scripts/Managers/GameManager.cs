@@ -99,7 +99,7 @@ namespace Managers
         void OnPlayerWin()
         {
             _score++;
-            scoreText.text = "Score: " + _score;
+            scoreText.text = _score.ToString();
             AnimationEvents.ScoreIncreased(Vector3.zero, "+1");
             AudioManager.Instance.PlayWinSFX();
             Invoke(nameof(RestartRound), 2f);

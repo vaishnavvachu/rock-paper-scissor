@@ -23,7 +23,7 @@ namespace Animation
             seq.Append(transform.DOScale(targetScale, scaleDuration).SetEase(Ease.OutBack));
             seq.Join(canvasGroup.DOFade(1f, fadeDuration));
             seq.AppendInterval(displayDuration);
-            seq.Append(canvasGroup.DOFade(0f, fadeDuration));
+            seq.Append(canvasGroup.DOFade(0f, 0.1f));
             seq.OnComplete(() => Destroy(gameObject));
         }
     }
