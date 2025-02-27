@@ -38,7 +38,7 @@ namespace Player
                     break;
             }
 
-            IHandStrategy aiHand = _aiPlayer.GetRandomHand();
+            IHandStrategy aiHand = _aiPlayer.GetRandomHand(_playerHand);
         
             GameManager.Instance.EvaluateRound(_playerHand, aiHand);
             UIManager.Instance.UpdateHandImages(_playerHand.GetHandType(), aiHand.GetHandType());
