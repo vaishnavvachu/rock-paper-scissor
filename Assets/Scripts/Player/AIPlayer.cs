@@ -1,4 +1,5 @@
 using HandStrategy;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Player
