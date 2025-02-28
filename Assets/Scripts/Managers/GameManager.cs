@@ -11,6 +11,9 @@ namespace Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
+        
+        public bool IsRoundEvaluating { get; private set; } = false;
+        
         [SerializeField] private TextMeshProUGUI scoreText;
 
         private int _score;
@@ -59,6 +62,11 @@ namespace Managers
         private string _message = "";
         public void EvaluateRound(IHandStrategy playerHand, IHandStrategy aiHand)
         {
+            if (IsRoundEvaluating)
+                return; 
+
+            IsRoundEvaluating = true;
+            
             if (playerHand == null)
             {
                 _message = "Time's up! You lose!";
@@ -87,8 +95,14 @@ namespace Managers
             }
             AnimationEvents.RoundResultPopup(_message);
             HighScoreManager.Instance.UpdateScore(_score);
+            
+            Invoke(nameof(ResetEvaluationFlag), 1.5f);
         }
-
+        private void ResetEvaluationFlag()
+        {
+            IsRoundEvaluating = false;
+            UIManager.Instance.SetButtonsInteractable(true);
+        }
         void OnTimeUp()
         {
             _score = 0; 

@@ -24,6 +24,7 @@ namespace UI
         [Header("Hand UI References")]
         [SerializeField] private Image playerHandImage;
         [SerializeField] private Image aiHandImage;
+        [SerializeField] private Button[] handButtons;
         
         [Header("Timer UI References")]
         [SerializeField] private Image timerProgressBar; 
@@ -106,6 +107,14 @@ namespace UI
         public void ShowGameOver(int finalScore)
         {
             SetState(new GameOverState(finalScore));
+        }
+        
+        public void SetButtonsInteractable(bool state)
+        {
+            foreach (Button btn in handButtons)
+            {
+                btn.interactable = state;
+            }
         }
         public void UpdateHandImages(HandType playerHand, HandType aiHand)
         {

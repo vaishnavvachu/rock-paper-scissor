@@ -854,6 +854,12 @@ MonoBehaviour:
   gameOverScoreText: {fileID: 168073403}
   playerHandImage: {fileID: 1809789490}
   aiHandImage: {fileID: 883118857}
+  handButtons:
+  - {fileID: 469532860}
+  - {fileID: 1434926400}
+  - {fileID: 1846919629}
+  - {fileID: 1509449434}
+  - {fileID: 796820941}
   timerProgressBar: {fileID: 1358982589}
   defaultSprite: {fileID: 21300000, guid: 5f8f8cdb37675e94d992bbb94b345dea, type: 3}
   rockSprite: {fileID: 21300000, guid: a7ccb3e83dfbaa747b61d6299e3c3f85, type: 3}

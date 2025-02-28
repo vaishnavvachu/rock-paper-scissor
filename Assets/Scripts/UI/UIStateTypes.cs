@@ -47,7 +47,6 @@ namespace UI
             uiManager.gameOverPanel.SetActive(true);
             uiManager.gameOverScoreText.text = "Score: " + finalScore;
         
-            // Optionally, animate the GameOver panel (e.g., fade in)
             CanvasGroup cg = uiManager.gameOverPanel.GetComponent<CanvasGroup>();
             if(cg != null)
             {

@@ -2,6 +2,7 @@ using HandStrategy;
 using Managers;
 using UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -15,6 +16,11 @@ namespace Player
         }
         public void SelectHand(int handIndex)
         {
+            if(GameManager.Instance.IsRoundEvaluating)
+                return;
+            
+            UIManager.Instance.SetButtonsInteractable(false);
+            
             GameManager.Instance.CancelRoundTimer();
             
             HandType handType = (HandType)handIndex;
@@ -44,5 +50,7 @@ namespace Player
             UIManager.Instance.UpdateHandImages(_playerHand.GetHandType(), aiHand.GetHandType());
 
         }
+        
+        
     }
 }
