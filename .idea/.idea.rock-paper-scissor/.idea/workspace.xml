@@ -6,18 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="a9fe0d7b-c5e8-40c0-87c2-459e3358432f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.rock-paper-scissor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.rock-paper-scissor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HandDataSO.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HandDataSO.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HandStrategy.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HandStrategy.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSButton.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSButton.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSModel.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSView.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RPSView.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Icon-round-Question_mark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/Icon-round-Question_mark.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-lizard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-lizard.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-paper.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-paper.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-rock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-rock.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-scissors.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-scissors.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-spock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ArtAssets/icon-spock.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RPSController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/RPSController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RPSModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/RPSModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/RPSView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/RPSView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Hand/HandSelectionButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Hand/HandSelectionButton.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/MainScene.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +116,7 @@
       <workItem from="1740655966326" duration="10996000" />
       <workItem from="1740723210146" duration="737000" />
       <workItem from="1740999507579" duration="5729000" />
-      <workItem from="1741073843968" duration="1775000" />
+      <workItem from="1741073843968" duration="12432000" />
     </task>
     <servers />
   </component>

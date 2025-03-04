@@ -1,24 +1,25 @@
-using UnityEngine;
+
 using System;
-using Random = System.Random;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public enum RPSChoice { Rock, Paper, Scissors, Lizard, Spock, None }
+public enum RoundResult { Win, Lose, Tie }
 
 public class RPSModel
 {
     public RPSChoice PlayerChoice { get; private set; }
     public RPSChoice AIChoice { get; private set; }
-    public int playerScore { get; private set; }
-    public event Action<RPSChoice, RPSChoice, string> OnRoundComplete; 
+    public int PlayerScore { get; private set; }
+    public event Action<RPSChoice, RPSChoice, RoundResult> OnRoundComplete; 
     public event Action<int> OnScoreUpdated; 
     public event Action OnPlayerLose;
     
-    private Random _random = new Random();
-
     public void SetPlayerChoice(RPSChoice choice)
     {
         PlayerChoice = choice;
-        AIChoice = (RPSChoice)_random.Next(0, 5);
+        AIChoice = (RPSChoice)UnityEngine.Random.Range(0, 5);
         DetermineWinner();
     }
 
@@ -34,29 +35,40 @@ public class RPSModel
             _ => throw new ArgumentException("Invalid choice"),
         };
     }
-
+    public void ResetGame()
+    {
+        PlayerScore = 0;
+        OnScoreUpdated?.Invoke(PlayerScore);
+    }
+   
     private void DetermineWinner()
     {
-        string result;
-
+        RoundResult roundResult;
         if (PlayerChoice == AIChoice)
         {
-            result = "It's a Tie!";
+            roundResult = RoundResult.Tie;
         }
         else if (GetStrategy(PlayerChoice).Beats(AIChoice))
         {
-            result = "You Win!";
-            playerScore++; 
-            OnScoreUpdated?.Invoke(playerScore);
+            roundResult = RoundResult.Win;
+            PlayerScore++;
+            OnScoreUpdated?.Invoke(PlayerScore);
         }
         else
         {
-            result = "You Lose!";
-            OnPlayerLose?.Invoke(); 
+            roundResult = RoundResult.Lose;
+            OnPlayerLose?.Invoke();
+            return;
         }
 
-        OnRoundComplete?.Invoke(PlayerChoice, AIChoice, result);
+        OnRoundComplete?.Invoke(PlayerChoice, AIChoice, roundResult);
+
     }
+
+
+
+
+    
 }
 
 

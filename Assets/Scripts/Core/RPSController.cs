@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RPSController : MonoBehaviour
@@ -10,24 +11,73 @@ public class RPSController : MonoBehaviour
         _model = new RPSModel();
         _view = FindFirstObjectByType<RPSView>();
 
-        _model.OnRoundComplete += _view.UpdateRoundUI;
+        _model.OnRoundComplete += HandleRoundComplete;
         _model.OnScoreUpdated += _view.UpdateScoreUI;
-        _model.OnPlayerLose += _view.ShowMainMenu; 
+        _model.OnPlayerLose += _view.ShowMainMenu;
+        
+        _view.OnTimerExpired += HandleTimeout;
+        _view.OnChoiceSelected += OnPlayerChoice;
+    }
 
-        _view.ShowMainMenu();
-    }
-    
-    public void OnPlayerChoice(RPSChoice choice)
-    {
-        _model.SetPlayerChoice(choice);
-    }
-    private void OnDestroy()
-    {
-        _view.OnChoiceSelected -= _model.SetPlayerChoice;
-        _model.OnRoundComplete -= _view.UpdateUI;
-    }
     public void StartGame()
     {
-        _view.ShowGameUI();
+        _model.ResetGame();  
+        _view.ResetUI();    
+        _view.ShowGameUI();  
+
+        StartNewRound();
+    }
+
+    private void StartNewRound()
+    {
+        _view.ResetTimer();
+        _view.StartTimer();
+    }
+
+    private void HandleRoundComplete(RPSChoice playerChoice, RPSChoice aiChoice, RoundResult result)
+    {
+        _view.UpdateRoundUI(playerChoice, aiChoice, result.ToString());
+        if (result == RoundResult.Win || result == RoundResult.Tie)
+        {
+            StartCoroutine(StartNewRoundWithDelay(1f));
+        }
+        else
+        {
+            _view.ShowMainMenu(); 
+        }
+    }
+
+    private IEnumerator StartNewRoundWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        StartNewRound();
+    }
+
+    private void HandleTimeout()
+    {
+        _view.ShowMainMenu();
+    }
+
+    public void OnPlayerChoice(RPSChoice choice)
+    {
+        
+        _model.SetPlayerChoice(choice);
+    }
+
+    private void OnDestroy()
+    {
+        if (_view != null)
+        {
+            _view.OnChoiceSelected -= OnPlayerChoice;
+            _view.OnTimerExpired -= HandleTimeout;
+        }
+
+        if (_model != null)
+        {
+            _model.OnRoundComplete -= HandleRoundComplete;
+            _model.OnScoreUpdated -= _view.UpdateScoreUI;
+            _model.OnPlayerLose -= _view.ShowMainMenu;
+        }
+
     }
 }

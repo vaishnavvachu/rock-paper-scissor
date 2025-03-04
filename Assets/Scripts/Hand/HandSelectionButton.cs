@@ -3,16 +3,21 @@ using UnityEngine.UI;
 
 public class HandSelectionButton : MonoBehaviour
 {
-    public HandDataSO handData;  
-    public Image buttonImage;  
+    public HandDataSO handData;
+    public Image buttonImage;
 
-    private RPSController _controller;
+    private RPSView _view;
 
     private void Start()
     {
-        _controller = FindFirstObjectByType<RPSController>();
-        buttonImage.sprite = handData.handSprite; 
+        _view = FindFirstObjectByType<RPSView>(); 
+        buttonImage.sprite = handData.handSprite;
 
-        GetComponent<Button>().onClick.AddListener(() => _controller.OnPlayerChoice(handData.handType));
+        GetComponent<Button>().onClick.AddListener(OnButtonClick);
+    }
+
+    private void OnButtonClick()
+    {
+        _view.PlayerSelectsHand(handData.handType); 
     }
 }
