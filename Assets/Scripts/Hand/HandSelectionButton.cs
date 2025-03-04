@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RPSButton : MonoBehaviour
+public class HandSelectionButton : MonoBehaviour
 {
     public HandDataSO handData;  
     public Image buttonImage;  

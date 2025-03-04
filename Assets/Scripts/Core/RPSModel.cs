@@ -8,9 +8,11 @@ public class RPSModel
 {
     public RPSChoice PlayerChoice { get; private set; }
     public RPSChoice AIChoice { get; private set; }
-
-    public event Action<RPSChoice, RPSChoice, string> OnGameResult;
-
+    public int playerScore { get; private set; }
+    public event Action<RPSChoice, RPSChoice, string> OnRoundComplete; 
+    public event Action<int> OnScoreUpdated; 
+    public event Action OnPlayerLose;
+    
     private Random _random = new Random();
 
     public void SetPlayerChoice(RPSChoice choice)
@@ -44,13 +46,16 @@ public class RPSModel
         else if (GetStrategy(PlayerChoice).Beats(AIChoice))
         {
             result = "You Win!";
+            playerScore++; 
+            OnScoreUpdated?.Invoke(playerScore);
         }
         else
         {
             result = "You Lose!";
+            OnPlayerLose?.Invoke(); 
         }
 
-        OnGameResult?.Invoke(PlayerChoice, AIChoice, result);
+        OnRoundComplete?.Invoke(PlayerChoice, AIChoice, result);
     }
 }
 
