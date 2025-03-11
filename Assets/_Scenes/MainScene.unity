@@ -673,7 +673,7 @@ MonoBehaviour:
   aiHandImage: {fileID: 883118857}
   resultPanel: {fileID: 1558163414}
   resultText: {fileID: 1826545817}
-  gameOverPanel: {fileID: 1752784535}
+  gameOverPanel: {fileID: 2116465653}
 --- !u!1 &235708905
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,10 +42,12 @@ public class RPSView : MonoBehaviour
     }
     public void ShowMainMenu()
     {
-        mainMenuCanvas.SetActive(true);
-        gameCanvas.SetActive(false);
-        //_animator.AnimateGameOverScreen();
-        ResetTimer();
+        _animator.AnimateGameOverScreen(() =>
+        {
+            mainMenuCanvas.SetActive(true);
+            gameCanvas.SetActive(false);
+            ResetTimer();
+        });
     }
     
     public void UpdateRoundUI(RPSChoice playerChoice, RPSChoice aiChoice, RoundResult result)

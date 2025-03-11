@@ -58,6 +58,7 @@ public class RPSModel
         {
             roundResult = RoundResult.Lose;
             OnPlayerLose?.Invoke();
+            OnRoundComplete?.Invoke(PlayerChoice, AIChoice, roundResult);
             return;
         }
 

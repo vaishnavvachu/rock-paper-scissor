@@ -58,10 +58,24 @@ public class RPSUIAnimator : MonoBehaviour
     }
 
 
-    public void AnimateGameOverScreen()
+    public void AnimateGameOverScreen(System.Action onComplete)
     {
-        gameOverPanel.transform.localScale = Vector3.zero;
-        gameOverPanel.transform.DOScale(1f, 1.5f).SetEase(Ease.OutElastic);
-        gameOverPanel.SetActive(true);
+        DOVirtual.DelayedCall(1f, () =>
+        {
+            gameOverPanel.SetActive(true);
+            gameOverPanel.transform.localScale = Vector3.zero;
+
+            gameOverPanel.transform.DOScale(1f, 0.5f)
+                .SetEase(Ease.OutBounce)
+                .OnComplete(() =>
+                {
+                    DOVirtual.DelayedCall(1.5f, () =>
+                    {
+                        gameOverPanel.SetActive(false);
+                        onComplete?.Invoke();
+                    });
+                });
+        });
     }
+
 }
