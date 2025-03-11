@@ -34,22 +34,28 @@ public class RPSView : MonoBehaviour
     private bool _isTimerRunning;
     private bool _choiceMade;
     private Coroutine _timerCoroutine;
+    private RPSUIAnimator _animator;
     private void Start()
     {
         resultText.text = "Choose your hand!";
+        _animator = FindFirstObjectByType<RPSUIAnimator>();  
     }
     public void ShowMainMenu()
     {
         mainMenuCanvas.SetActive(true);
         gameCanvas.SetActive(false);
+        //_animator.AnimateGameOverScreen();
         ResetTimer();
     }
     
-    public void UpdateRoundUI(RPSChoice playerChoice, RPSChoice aiChoice, string result)
+    public void UpdateRoundUI(RPSChoice playerChoice, RPSChoice aiChoice, RoundResult result)
     {
         playerHandImage.sprite = GetSprite(playerChoice);
         aiHandImage.sprite = GetSprite(aiChoice);
-        resultText.text = result;
+        resultText.text = result.ToString();
+        _animator.AnimateHandReveal(GetSprite(playerChoice), GetSprite(aiChoice));
+        string reason = WinningReason.GetWinningReason(playerChoice, aiChoice);
+        ShowResultScreen(result, reason);
     }
     public void StartTimer()
     {
@@ -105,9 +111,7 @@ public class RPSView : MonoBehaviour
             OnChoiceSelected.Invoke(choice);
         }
     }
-
-
-
+    
     public void ResetTimer()
     {
         _isTimerRunning = false;
@@ -121,6 +125,10 @@ public class RPSView : MonoBehaviour
     {
         mainMenuCanvas.SetActive(false);
         gameCanvas.SetActive(true);
+    }
+    private void ShowResultScreen(RoundResult result, string reason)
+    {
+        _animator.AnimateWinLoseScreen(result, reason);
     }
     
     public void UpdateUI(RPSChoice playerChoice, RPSChoice aiChoice, string result)

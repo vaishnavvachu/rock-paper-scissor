@@ -36,10 +36,10 @@ public class RPSController : MonoBehaviour
 
     private void HandleRoundComplete(RPSChoice playerChoice, RPSChoice aiChoice, RoundResult result)
     {
-        _view.UpdateRoundUI(playerChoice, aiChoice, result.ToString());
+        _view.UpdateRoundUI(playerChoice, aiChoice, result);
         if (result == RoundResult.Win || result == RoundResult.Tie)
         {
-            StartCoroutine(StartNewRoundWithDelay(1f));
+            StartCoroutine(StartNewRoundWithDelay(2f));
         }
         else
         {
