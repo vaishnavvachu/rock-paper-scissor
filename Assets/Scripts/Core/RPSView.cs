@@ -23,6 +23,7 @@ public class RPSView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI aiChoiceText;
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private TextMeshProUGUI playerScoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
     [Header("Image References")]
     [SerializeField] private Image playerHandImage;
     [SerializeField] private Image aiHandImage;
@@ -47,6 +48,7 @@ public class RPSView : MonoBehaviour
             mainMenuCanvas.SetActive(true);
             gameCanvas.SetActive(false);
             ResetTimer();
+            UpdateHighScoreUI(PlayerPrefs.GetInt("HighScore", 0));
         });
     }
     
@@ -122,6 +124,10 @@ public class RPSView : MonoBehaviour
     public void UpdateScoreUI(int playerScore)
     {
         playerScoreText.text = "Score: " + playerScore;
+    }
+    public void UpdateHighScoreUI(int highScore)
+    {
+        highScoreText.text = "High Score: " + highScore;
     }
     public void ShowGameUI()
     {
