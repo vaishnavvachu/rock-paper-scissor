@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Paper
   m_EditorClassIdentifier: 
   handType: 1
-  handSprite: {fileID: 21300000, guid: 83ae14d7db87dff498ab3cdf511caac9, type: 3}
+  handSprite: {fileID: -1469909079130451432, guid: 3172aada529f6be4692b7654286e8c8b, type: 3}

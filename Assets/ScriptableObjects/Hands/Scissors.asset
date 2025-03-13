@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Scissors
   m_EditorClassIdentifier: 
   handType: 2
-  handSprite: {fileID: 21300000, guid: fd1ed954a057d904a9da4217bcce680c, type: 3}
+  handSprite: {fileID: 7766721758921934520, guid: f2d5599c6ae2bf54bbe893c0e5fe9ac3, type: 3}

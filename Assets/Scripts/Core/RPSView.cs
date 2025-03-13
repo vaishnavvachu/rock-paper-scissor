@@ -123,7 +123,7 @@ public class RPSView : MonoBehaviour
     }
     public void UpdateScoreUI(int playerScore)
     {
-        playerScoreText.text = "Score: " + playerScore;
+        playerScoreText.text = "" + playerScore;
     }
     public void UpdateHighScoreUI(int highScore)
     {
@@ -164,7 +164,7 @@ public class RPSView : MonoBehaviour
         playerHandImage.sprite = null; 
         aiHandImage.sprite = null;
         timerImage.fillAmount = 1f;
-        playerScoreText.text = "Score: 0";
+        playerScoreText.text = "0";
     }
 
 }

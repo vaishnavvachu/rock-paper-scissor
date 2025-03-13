@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Rock
   m_EditorClassIdentifier: 
   handType: 0
-  handSprite: {fileID: 21300000, guid: 5736693a931e88441bfb70b9f7596d7e, type: 3}
+  handSprite: {fileID: -2182124076254010665, guid: 799d3d6dda6058147932d65e6a57fd13, type: 3}
